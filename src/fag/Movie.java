@@ -2,22 +2,18 @@ package fag;
 
 public class Movie {
 
-	  // Constantes de preço (ainda necessárias para o Price.createPrice())
-	  public static final int  CHILDRENS = 2;
-	  public static final int  REGULAR = 0;
-	  public static final int  NEW_RELEASE = 1;
+	  // CONSTANTES DE PREÇO REMOVIDAS! (MUDANÇA DO COMMIT 13)
 
 	  private String _title;
 	  private Price _price; // Usa a nova classe Price
 
-	  // Construtor: AGORA CHAMA O FACTORY METHOD DIRETAMENTE (MUDANÇA DO COMMIT 12)
+	  // Construtor: AGORA CHAMA O FACTORY METHOD DIRETAMENTE
 	  public Movie(String title, int priceCode) {
 	      _title = title;
+          // O createPrice() agora usa as constantes de Price.java
 	      _price = Price.createPrice(priceCode); 
 	  }
       
-      // getPriceCode() e setPriceCode() FORAM REMOVIDOS! (MUDANÇA DO COMMIT 12)
-
 	  public String getTitle (){
 	      return _title;
 	  }
