@@ -2,25 +2,23 @@ package fag;
 
 public class Movie {
 
+	  // Constantes de preço necessárias aqui para que a classe Price possa usá-las
 	  public static final int  CHILDRENS = 2;
 	  public static final int  REGULAR = 0;
 	  public static final int  NEW_RELEASE = 1;
 
 	  private String _title;
-	  private Price _price; // <--- MUDANÇA 1: Substitui _priceCode por objeto Price
+	  private Price _price;
 
 	  public Movie(String title, int priceCode) {
 	      _title = title;
-          // MUDANÇA 2: Cria o objeto Price no construtor
 	      _price = new Price(priceCode); 
 	  }
 
-      // MUDANÇA 3: Delega a chamada ao objeto _price
 	  public int getPriceCode() {
 	      return _price.getPriceCode();
 	  }
 
-      // MUDANÇA 4: Delega a chamada ao objeto _price
 	  public void setPriceCode(int arg) {
 	      _price.setPriceCode(arg);
 	  }
@@ -29,31 +27,12 @@ public class Movie {
 	      return _title;
 	  }
       
-    // MÉTODO getCharge() Simples: Chama o auxiliar
+    // MÉTODO getCharge() AGORA DELEGA a chamada a _price (MUDANÇA DO COMMIT 9)
     public double getCharge(int daysRented) {
-        return getThisAmount(daysRented);
+        return _price.getCharge(daysRented);
     }
     
-    // MÉTODO getThisAmount(): Sem Alterações (usando getPriceCode())
-    private double getThisAmount(int daysRented) {
-        double result = 0;
-        switch (getPriceCode()) {
-            case Movie.REGULAR:
-                result += 2;
-                if (daysRented > 2)
-                    result += (daysRented - 2) * 1.5;
-                break;
-            case Movie.NEW_RELEASE:
-                result += daysRented * 3;
-                break;
-            case Movie.CHILDRENS:
-                result += 1.5;
-                if (daysRented > 3)
-                    result += (daysRented - 3) * 1.5;
-                break;
-        }
-        return result;
-    }
+    // MÉTODO getThisAmount() FOI REMOVIDO! (MUDANÇA DO COMMIT 9)
     
     // MÉTODO DE PONTOS INALTERADO
 	  public int getFrequentRenterPoints(int daysRented) {
