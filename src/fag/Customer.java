@@ -19,32 +19,38 @@ public class Customer {
       return _name;
    }
   
-  public String statement() {
-     double totalAmount = 0;
-     int frequentRenterPoints = 0;
-     Enumeration rentals = _rentals.elements();
-     String result = "Rental Record for " + getName() + "\n";
-     while (rentals.hasMoreElements()) {
-        double thisAmount = 0;
+   public String statement() {
+	    Enumeration rentals = _rentals.elements();
+	    String result = "Rental Record for " + getName() + "\n";
+	    while (rentals.hasMoreElements()) {
+	        Rental each = (Rental) rentals.nextElement();
+	        // show figures for this rental
+	        result += "\t" + each.getMovie().getTitle() + "\t" + each.getCharge() + "\n";
+	    }
+	    // add footer lines
+	    result += "Amount owed is " + getTotalCharge() + "\n"; // <--- CHAMA NOVO MÉTODO AUXILIAR
+	    result += "You earned " + getTotalFrequentRenterPoints() + " frequent renter points"; // <--- CHAMA NOVO MÉTODO AUXILIAR
+	    return result;
+	}
+// NOVO MÉTODO 1: Calcula o valor total (AGORA CHAMA getCharge() de Rental, que acabamos de criar)
+private double getTotalCharge() {
+    double result = 0;
+    Enumeration rentals = _rentals.elements();
+    while (rentals.hasMoreElements()) {
         Rental each = (Rental) rentals.nextElement();
+        result += each.getCharge();
+    }
+    return result;
+}
 
-        //determine amounts for each line
-     // Novo código que substitui o bloco switch
-        thisAmount = each.getMovie().getCharge(each.getDaysRented());
-
-     // Novo código que substitui o bloco if
-        frequentRenterPoints += each.getMovie().getFrequentRenterPoints(each.getDaysRented());
-
-        //show figures for this rental
-        result += "\t" + each.getMovie().getTitle()+ "\t" +
-            String.valueOf(thisAmount) + "\n";
-        totalAmount += thisAmount;
-
-     }
-     //add footer lines
-     result +=  "Amount owed is " + String.valueOf(totalAmount) + "\n";
-     result += "You earned " + String.valueOf(frequentRenterPoints) +
-             " frequent renter points";
-     return result;
-   }
+// NOVO MÉTODO 2: Calcula os pontos totais (AGORA CHAMA getFrequentRenterPoints() de Rental)
+private int getTotalFrequentRenterPoints() {
+    int result = 0;
+    Enumeration rentals = _rentals.elements();
+    while (rentals.hasMoreElements()) {
+        Rental each = (Rental) rentals.nextElement();
+        result += each.getFrequentRenterPoints();
+    }
+    return result;
+}
 }
