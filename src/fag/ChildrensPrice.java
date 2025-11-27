@@ -1,7 +1,7 @@
 package fag;
 
 public class ChildrensPrice extends Price {
-    // Implementa o cálculo de preço Infantil
+    @Override
     public double getCharge(int daysRented) {
         double result = 1.5;
         if (daysRented > 3)
@@ -9,7 +9,7 @@ public class ChildrensPrice extends Price {
         return result;
     }
 
-    // Implementa o cálculo de FRP Infantil (1 ponto)
+    @Override
     public int getFrequentRenterPoints(int daysRented) {
         return 1;
     }

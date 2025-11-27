@@ -1,13 +1,14 @@
 package fag;
 
 public class NewReleasePrice extends Price {
-    // Implementa o cálculo de preço de Lançamento
+    @Override
     public double getCharge(int daysRented) {
         return daysRented * 3;
     }
 
-    // Implementa o cálculo de FRP de Lançamento (2 pontos se for > 1 dia)
+    @Override
     public int getFrequentRenterPoints(int daysRented) {
+        // Aluguel de lançamento por mais de um dia gera 2 pontos FRP
         return (daysRented > 1) ? 2 : 1;
     }
 }

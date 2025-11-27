@@ -1,7 +1,7 @@
 package fag;
 
 public class RegularPrice extends Price {
-    // Implementa o cálculo de preço Regular
+    @Override
     public double getCharge(int daysRented) {
         double result = 2;
         if (daysRented > 2)
@@ -9,7 +9,7 @@ public class RegularPrice extends Price {
         return result;
     }
 
-    // Implementa o cálculo de FRP Regular (1 ponto)
+    @Override
     public int getFrequentRenterPoints(int daysRented) {
         return 1;
     }

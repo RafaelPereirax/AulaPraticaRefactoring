@@ -1,10 +1,9 @@
 package fag;
 
-// Classe Price.java ATUALIZADA (Abstrata para o Commit 11)
-// Não é mais necessário ter _priceCode, pois a subclasse define o tipo.
+// Classe Price.java - ABSTRATA
 public abstract class Price {
 
-    // NOVO MÉTODO: Método de criação de preço (Factory Method)
+    // Factory Method: Cria a subclasse correta
     public static Price createPrice(int priceCode) {
         switch (priceCode) {
             case Movie.REGULAR:
@@ -18,12 +17,9 @@ public abstract class Price {
         }
     }
     
-    // MÉTODO ABSTRATO: Cada subclasse implementará sua própria regra de cobrança
+    // Métodos ABSTRATOS
     public abstract double getCharge(int daysRented);
-
-    // MÉTODO ABSTRATO: Cada subclasse implementará sua própria regra de pontos FRP
     public abstract int getFrequentRenterPoints(int daysRented);
     
-    // getPriceCode() e _priceCode REMOVIDOS
-    // setPriceCode() REMOVIDO
+    // getPriceCode() e setPriceCode() REMOVIDOS
 }
