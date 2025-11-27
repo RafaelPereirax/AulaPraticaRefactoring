@@ -1,6 +1,6 @@
 package fag;
 
-// Classe Price.java ATUALIZADA
+// Classe Price.java ATUALIZADA para o Commit 10
 public class Price {
     private int _priceCode;
 
@@ -16,7 +16,7 @@ public class Price {
         _priceCode = arg;
     }
     
-    // NOVO MÉTODO: Recebe a lógica de cálculo (movida de Movie.getThisAmount())
+    // Método getCharge (movido no Commit 9)
     public double getCharge(int daysRented) {
         double result = 0;
         switch (getPriceCode()) {
@@ -35,5 +35,14 @@ public class Price {
                 break;
         }
         return result;
+    }
+
+    // NOVO MÉTODO: Lógica de cálculo de pontos FRP (MUDANÇA DO COMMIT 10)
+    public int getFrequentRenterPoints(int daysRented) {
+        // Usa o getPriceCode() da própria classe Price
+        if ((getPriceCode() == Movie.NEW_RELEASE) && daysRented > 1) {
+            return 2;
+        }
+        return 1;
     }
 }

@@ -2,7 +2,7 @@ package fag;
 
 public class Movie {
 
-	  // Constantes de preço necessárias aqui para que a classe Price possa usá-las
+	  // Constantes de preço (ainda necessárias aqui e em Price)
 	  public static final int  CHILDRENS = 2;
 	  public static final int  REGULAR = 0;
 	  public static final int  NEW_RELEASE = 1;
@@ -27,18 +27,14 @@ public class Movie {
 	      return _title;
 	  }
       
-    // MÉTODO getCharge() AGORA DELEGA a chamada a _price (MUDANÇA DO COMMIT 9)
+    // MÉTODO getCharge() DELEGA
     public double getCharge(int daysRented) {
         return _price.getCharge(daysRented);
     }
     
-    // MÉTODO getThisAmount() FOI REMOVIDO! (MUDANÇA DO COMMIT 9)
-    
-    // MÉTODO DE PONTOS INALTERADO
+    // MÉTODO getFrequentRenterPoints() AGORA DELEGA a chamada a _price (MUDANÇA DO COMMIT 10)
 	  public int getFrequentRenterPoints(int daysRented) {
-	      if ((getPriceCode() == Movie.NEW_RELEASE) && daysRented > 1) {
-	          return 2;
-	      }
-	      return 1;
+	      // A lógica IF foi movida para a classe Price.
+	      return _price.getFrequentRenterPoints(daysRented);
 	  }
 }
