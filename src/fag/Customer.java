@@ -21,24 +21,21 @@ public class Customer {
     
     // MÉTODO statement() CORRIGIDO (Reflete Commits 4 e 5)
     public String statement() {
-        Enumeration rentals = _rentals.elements(); // <-- MANTEMOS O ENUMERATOR AQUI
+        Enumeration rentals = _rentals.elements();
         String result = "Rental Record for " + getName() + "\n";
         
         while (rentals.hasMoreElements()) {
             Rental each = (Rental) rentals.nextElement();
-            // show figures for this rental
-            // CHAMA valueForRental(each) - (Reflete Commit 5)
             result += valueForRental(each); 
         }
         
         // add footer lines
-        // CHAMA MÉTODOS AUXILIARES (Reflete Commit 4)
         result += "Amount owed is " + getTotalCharge() + "\n";
         result += "You earned " + getTotalFrequentRenterPoints() + " frequent renter points";
         return result;
     }
 
-    // MÉTODO AUXILIAR getTotalCharge() (Reflete Commit 4)
+    // MÉTODO AUXILIAR getTotalCharge() (Inalterado)
     private double getTotalCharge() {
         double result = 0;
         Enumeration rentals = _rentals.elements();
@@ -49,7 +46,7 @@ public class Customer {
         return result;
     }
 
-    // MÉTODO AUXILIAR getTotalFrequentRenterPoints() (Reflete Commit 4)
+    // MÉTODO AUXILIAR getTotalFrequentRenterPoints() (Inalterado)
     private int getTotalFrequentRenterPoints() {
         int result = 0;
         Enumeration rentals = _rentals.elements();
@@ -60,13 +57,9 @@ public class Customer {
         return result;
     }
     
-    // MÉTODO AUXILIAR valueForRental() (Reflete Commit 5)
+    // MÉTODO AUXILIAR valueForRental() CORRIGIDO (MUDANÇA DO COMMIT 15)
     private String valueForRental(Rental each) {
-        // Precisa chamar getMovie() em Rental. Se isso causa erro, precisamos que a classe Rental tenha o getMovie()
-        // Por enquanto, assumimos que Rental.getMovie() existe (o que é o estado antes do Commit 6).
-        return "\t" + each.getMovie().getTitle() + "\t" + each.getCharge() + "\n";
+        // Substituímos each.getMovie().getTitle() por each.getMovieTitle()
+        return "\t" + each.getMovieTitle() + "\t" + each.getCharge() + "\n";
     }
-
-    // O método getRentals() NÃO é necessário, pois usamos _rentals.elements() diretamente nos auxiliares.
-    // public Enumeration getRentals() { return _rentals.elements(); } // <-- REMOVIDO para simplificar
 }
