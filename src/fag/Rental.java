@@ -1,41 +1,44 @@
 package fag;
 
-// Assumindo que Movie está no mesmo pacote fag
+// CLASSE Rental.java APÓS REMOÇÃO DO CAMPO _movie (COMMIT 14)
 public class Rental {
 
-    private Movie _movie; // <--- Variável _movie RESTAURADA
+    // _movie REMOVIDO! (MUDANÇA DO COMMIT 14)
     private int _daysRented;
+    // Novos campos criados para armazenar os resultados do cálculo (MUDANÇA DO COMMIT 14)
+    private double _charge;
+    private int _frequentRenterPoints;
+    private String _movieTitle;
 
-    // Construtor principal (o único necessário neste estágio)
+    // Construtor principal ajustado:
+    // Recebe o Movie, usa-o para calcular TUDO, e depois o descarta.
     public Rental(Movie movie, int daysRented) {
-        _movie = movie;
         _daysRented = daysRented;
+        // Os cálculos são feitos uma vez no construtor e armazenados nos campos
+        _charge = movie.getCharge(daysRented);
+        _frequentRenterPoints = movie.getFrequentRenterPoints(daysRented);
+        _movieTitle = movie.getTitle();
     }
 
     public int getDaysRented() {
         return _daysRented;
     }
 
-    // MÉTODO getMovie() é necessário para que Customer.valueForRental compile!
-    public Movie getMovie() {
-        return _movie;
-    }
+    // getMovie() REMOVIDO! (MUDANÇA DO COMMIT 14)
+    // O código que chama getMovie() em Customer.java vai quebrar, corrigiremos no Commit 15.
 
-    // MÉTODO 1: Para calcular o valor deste aluguel (Adicionado no Commit 4)
+    // MÉTODO getCharge() AGORA RETORNA O CAMPO
     public double getCharge() {
-        return _movie.getCharge(_daysRented);
+        return _charge;
     }
 
-    // MÉTODO 2: Para calcular os pontos FRP deste aluguel (Adicionado no Commit 4)
+    // MÉTODO getFrequentRenterPoints() AGORA RETORNA O CAMPO
     public int getFrequentRenterPoints() {
-        return _movie.getFrequentRenterPoints(_daysRented);
+        return _frequentRenterPoints;
     }
-
-    // MÉTODO TEMPORÁRIO movie() (Que você estava adicionando no Commit 6)
-    // Vamos removê-lo agora, pois getMovie() já faz o trabalho,
-    // e o Commit 6 será a remoção completa.
     
-    /* public Movie movie() {
-           return _movie;
-    } */
+    // NOVO MÉTODO para substituir getMovie().getTitle() (MUDANÇA DO COMMIT 14)
+    public String getMovieTitle() {
+        return _movieTitle;
+    }
 }
