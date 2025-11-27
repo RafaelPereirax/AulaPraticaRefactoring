@@ -32,11 +32,8 @@ public class Customer {
      // Novo código que substitui o bloco switch
         thisAmount = each.getMovie().getCharge(each.getDaysRented());
 
-        // add frequent renter points
-        frequentRenterPoints ++;
-        // add bonus for a two day new release rental
-        if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE) &&
-            each.getDaysRented() > 1) frequentRenterPoints ++;
+     // Novo código que substitui o bloco if
+        frequentRenterPoints += each.getMovie().getFrequentRenterPoints(each.getDaysRented());
 
         //show figures for this rental
         result += "\t" + each.getMovie().getTitle()+ "\t" +
