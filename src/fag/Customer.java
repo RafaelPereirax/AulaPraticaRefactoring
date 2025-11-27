@@ -25,7 +25,7 @@ public class Customer {
 	    while (rentals.hasMoreElements()) {
 	        Rental each = (Rental) rentals.nextElement();
 	        // show figures for this rental
-	        result += "\t" + each.getMovie().getTitle() + "\t" + each.getCharge() + "\n";
+	        result += valueForRental(each);
 	    }
 	    // add footer lines
 	    result += "Amount owed is " + getTotalCharge() + "\n"; // <--- CHAMA NOVO MÉTODO AUXILIAR
@@ -52,5 +52,8 @@ private int getTotalFrequentRenterPoints() {
         result += each.getFrequentRenterPoints();
     }
     return result;
+}
+private String valueForRental(Rental each) {
+    return "\t" + each.getMovie().getTitle() + "\t" + each.getCharge() + "\n";
 }
 }
