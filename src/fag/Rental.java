@@ -1,22 +1,17 @@
 package fag;
 
-// CLASSE Rental.java APÓS REMOÇÃO DO CAMPO _movie (COMMIT 14)
+// CLASSE Rental.java APÓS LIMPEZA FINAL (COMMIT 16)
 public class Rental {
 
-    // _movie REMOVIDO! (MUDANÇA DO COMMIT 14)
     private int _daysRented;
-    // Novos campos criados para armazenar os resultados do cálculo (MUDANÇA DO COMMIT 14)
-    private double _charge;
-    private int _frequentRenterPoints;
+    // _charge e _frequentRenterPoints REMOVIDOS! (MUDANÇA DO COMMIT 16)
     private String _movieTitle;
 
     // Construtor principal ajustado:
-    // Recebe o Movie, usa-o para calcular TUDO, e depois o descarta.
+    // Agora armazena APENAS o título e os dias alugados.
     public Rental(Movie movie, int daysRented) {
         _daysRented = daysRented;
-        // Os cálculos são feitos uma vez no construtor e armazenados nos campos
-        _charge = movie.getCharge(daysRented);
-        _frequentRenterPoints = movie.getFrequentRenterPoints(daysRented);
+        // APENAS o título é armazenado.
         _movieTitle = movie.getTitle();
     }
 
@@ -24,20 +19,10 @@ public class Rental {
         return _daysRented;
     }
 
-    // getMovie() REMOVIDO! (MUDANÇA DO COMMIT 14)
-    // O código que chama getMovie() em Customer.java vai quebrar, corrigiremos no Commit 15.
-
-    // MÉTODO getCharge() AGORA RETORNA O CAMPO
-    public double getCharge() {
-        return _charge;
-    }
-
-    // MÉTODO getFrequentRenterPoints() AGORA RETORNA O CAMPO
-    public int getFrequentRenterPoints() {
-        return _frequentRenterPoints;
-    }
+    // getCharge() REMOVIDO! (MUDANÇA DO COMMIT 16)
+    // getFrequentRenterPoints() REMOVIDO! (MUDANÇA DO COMMIT 16)
     
-    // NOVO MÉTODO para substituir getMovie().getTitle() (MUDANÇA DO COMMIT 14)
+    // MÉTODO para substituir getMovie().getTitle()
     public String getMovieTitle() {
         return _movieTitle;
     }
