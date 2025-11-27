@@ -2,39 +2,40 @@ package fag;
 
 public class Movie {
 
-	  // Constantes de preço (ainda necessárias aqui e em Price)
+	  // Constantes de preço (Ainda necessárias para o Price.createPrice())
 	  public static final int  CHILDRENS = 2;
 	  public static final int  REGULAR = 0;
 	  public static final int  NEW_RELEASE = 1;
 
 	  private String _title;
-	  private Price _price;
+	  private Price _price; // Usa a nova classe Price
 
+	  // Construtor: usa o setter que chama o Factory Method
 	  public Movie(String title, int priceCode) {
 	      _title = title;
-	      _price = new Price(priceCode); 
+	      setPriceCode(priceCode); 
 	  }
+      
+      // MÉTODO getPriceCode() REMOVIDO NO COMMIT 12! (Por enquanto, deixamos um placeholder, mas o ideal é removê-lo.)
+      // Para evitar quebras em Customer/Rental que possam usar este método, vamos removê-lo.
+      // AQUI, assumimos que as chamadas foram removidas.
 
-	  public int getPriceCode() {
-	      return _price.getPriceCode();
-	  }
-
+      // Setter: Usa o Factory Method da Price
 	  public void setPriceCode(int arg) {
-	      _price.setPriceCode(arg);
+	      _price = Price.createPrice(arg);
 	  }
 
 	  public String getTitle (){
 	      return _title;
 	  }
       
-    // MÉTODO getCharge() DELEGA
+    // DELEGA PARA _price (método abstrato em Price, implementado nas subclasses)
     public double getCharge(int daysRented) {
         return _price.getCharge(daysRented);
     }
     
-    // MÉTODO getFrequentRenterPoints() AGORA DELEGA a chamada a _price (MUDANÇA DO COMMIT 10)
-	  public int getFrequentRenterPoints(int daysRented) {
-	      // A lógica IF foi movida para a classe Price.
-	      return _price.getFrequentRenterPoints(daysRented);
-	  }
+    // DELEGA PARA _price (método abstrato em Price, implementado nas subclasses)
+	public int getFrequentRenterPoints(int daysRented) {
+	    return _price.getFrequentRenterPoints(daysRented);
+	}
 }
