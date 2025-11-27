@@ -7,32 +7,34 @@ public class Movie {
 	  public static final int  NEW_RELEASE = 1;
 
 	  private String _title;
-	  private int _priceCode;
+	  private Price _price; // <--- MUDANÇA 1: Substitui _priceCode por objeto Price
 
 	  public Movie(String title, int priceCode) {
 	      _title = title;
-	      _priceCode = priceCode;
+          // MUDANÇA 2: Cria o objeto Price no construtor
+	      _price = new Price(priceCode); 
 	  }
 
+      // MUDANÇA 3: Delega a chamada ao objeto _price
 	  public int getPriceCode() {
-	      return _priceCode;
+	      return _price.getPriceCode();
 	  }
 
+      // MUDANÇA 4: Delega a chamada ao objeto _price
 	  public void setPriceCode(int arg) {
-	      _priceCode = arg;
+	      _price.setPriceCode(arg);
 	  }
 
 	  public String getTitle (){
 	      return _title;
 	  }
       
-    // MÉTODO getCharge() SIMPLIFICADO (MUDANÇA DO COMMIT 7)
+    // MÉTODO getCharge() Simples: Chama o auxiliar
     public double getCharge(int daysRented) {
-        // Agora, ele apenas chama o novo método auxiliar
         return getThisAmount(daysRented);
     }
     
-    // NOVO MÉTODO AUXILIAR getThisAmount() (ADICIONADO NO COMMIT 7)
+    // MÉTODO getThisAmount(): Sem Alterações (usando getPriceCode())
     private double getThisAmount(int daysRented) {
         double result = 0;
         switch (getPriceCode()) {
